@@ -1,0 +1,1 @@
+web: gunicorn Ciudades.wsgi --log-file -
