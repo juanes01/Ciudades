@@ -31,7 +31,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'Ciudades'))
 SECRET_KEY = 'p-h&*=be(he^peu@=)jhuu+!89df*dr(4u8_a^3nzmiud1tb*t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
@@ -49,7 +49,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware'
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,8 +59,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Ciudades.urls'
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 TEMPLATES = [
     {
@@ -144,7 +141,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
