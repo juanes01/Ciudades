@@ -31,7 +31,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'Ciudades'))
 SECRET_KEY = 'p-h&*=be(he^peu@=)jhuu+!89df*dr(4u8_a^3nzmiud1tb*t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
