@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {# Cargamos la librería #}
+    {% load bootstrap4 %}
+
+    {# CSS Bootstrap #}
+    {% bootstrap_css %}
+
+    {# Archivos #}
+    {% load static %} <!-- STATIC_URL -->
+    {% load widget_tweaks %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="http://nubecolectiva.com/favicon.ico"/>
+
+    <meta name="theme-color" content="#000000"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
+
+    <title></title>
+
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="./">Inicio <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.linkedin.com/in/juan-castrillon-a2092a84/">Mi perfil</a>
+                    </li>
+                </ul>
+                <form name="bencc" method="get" action="http://www.google.com/search" id="bencc"
+                      class="form-inline mt-2 mt-md-0" target="_blank">
+                    <input type="hidden" name="domains" value="blog.nubecolectiva.com">
+                    <input type="hidden" name="sitesearch" value="blog.nubecolectiva.com">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Buscar..." aria-label="Buscar...">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                            onclick="document.getElementById('bencc').submit()">Buscar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="pccp mt-5 mb-3" align="center">
+    <!-- P -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2390065838671224"
+         data-ad-slot="1441100372"
+         data-ad-format="auto"
+         data-full-width-responsive="true">
+
+    </ins>
+    <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+
+
+
+
+
+    </script>
+    <!-- End P -->
+</div>
+
+<main role="main">
+
+    <div class="container text-center mt-5">
+
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <h1 style="font-size: 28px;">Prueba Técnica </h1>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+
+            <div class="card col-md-2">
+                <h6 class="mt-4"><strong>Menú</strong></h6>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Dashboard</li>
+                    <li class="list-group-item active">Regiones</li>
+                    <li class="list-group-item">Municipios</li>
+                </ul>
+            </div>
+
+            <div class="col-md-10">
+
+                <div class="table-responsive">
+
+                    <nav aria-label="breadcrumb mb-3">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="./">Regiones</a></li>
+                            <li class="breadcrumb-item active">Crear</li>
+                        </ol>
+                    </nav>
+
+                    <div class="formulario" align="left">
+
+                        <h4>Crear</h4>
+
+                        <form method="post" enctype="multipart/form-data">
+
+                            {% csrf_token %}
+
+                            <!-- {{ form.as_p }} -->
+                            <div class="form-group">
+                                <label for="codigo" class="txt_negrita">Código</label>
+                                {{ form.codigo|add_class:"form-control" }}
+                                <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
+                            </div>
+                            <div class="form-group">
+                                <label for="nombre" class="txt_negrita">Nombre</label>
+                                {{ form.nombre|add_class:"form-control" }}
+                                <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
+                            </div>
+                            <div class="form-group">
+                                <label for="municipios" class="txt_negrita">Municipio</label>
+                                {{ form.municipios|add_class:"form-control" }}
+                                <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                            <a href="./" type="submit" class="btn btn-primary">Cancelar</a>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+{# JS y jQuery Bootstrap #}
+{% bootstrap_javascript jquery='full' %}
+
+</body>
+</html>
