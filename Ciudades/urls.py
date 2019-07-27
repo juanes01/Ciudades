@@ -23,18 +23,27 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='regiones'),
 
-    path('regiones/', views.RegionesListado.as_view(template_name="regiones/index.html"), name='leer'),
+    path('regiones/', views.RegionesListado.as_view(template_name="regiones/index.html"), name='leerRegion'),
 
-    # La ruta 'detalles' en donde mostraremos una página con los detalles de un postre o registro
+    path('municipios/', views.MunicipioListado.as_view(template_name="municipios/index.html"), name='leerMunicipio'),
+
+
     path('regiones/detalle/<int:pk>', views.RegionesDetalle.as_view(template_name="regiones/detalles.html"), name='detalles'),
 
-    # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo postre o registro
-    path('regiones/crear', views.RegionesCrear.as_view(template_name="regiones/crear.html"), name='crear'),
-    #
-    # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un postre o registro de la Base de Datos
+    path('municipios/detalle/<int:pk>', views.MunicipioDetalle.as_view(template_name="municipios/detalles.html"), name='detalles'),
+
+
+    path('regiones/crear', views.RegionesCrear.as_view(template_name="regiones/crear.html"), name='crearRegion'),
+
+    path('municipios/crear', views.MunicipiosCrear.as_view(template_name="municipios/crear.html"), name='crearMunicipio'),
+
     path('regiones/editar/<int:pk>', views.RegionesActualizar.as_view(template_name="regiones/actualizar.html"),
-         name='actualizar'),
-    #
-    # La ruta 'eliminar' que usaremos para eliminar un postre o registro de la Base de Datos
-    path('regiones/eliminar/<int:pk>', views.RegionesEliminar.as_view(), name='eliminar'),
+         name='actualizarRegion'),
+
+    path('municipios/editar/<int:pk>', views.MunicipiosActualizar.as_view(template_name="municipios/actualizar.html"),
+         name='actualizarMunicipio'),
+
+    path('regiones/eliminar/<int:pk>', views.RegionesEliminar.as_view(), name='eliminarRegiones'),
+
+    path('municipios/eliminar/<int:pk>', views.MunicipiosEliminar.as_view(), name='eliminarMunicipios'),
 ]

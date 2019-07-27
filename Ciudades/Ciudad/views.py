@@ -28,6 +28,12 @@ class RegionesListado(ListView):
 class RegionesDetalle(DetailView):
     model = Region
 
+class MunicipioListado(ListView):
+    model = Municipio
+
+class MunicipioDetalle(DetailView):
+    model = Municipio
+
 
 class RegionesCrear(SuccessMessageMixin, CreateView):
     model = Region
@@ -36,7 +42,16 @@ class RegionesCrear(SuccessMessageMixin, CreateView):
     success_message = 'Region Creada Correctamente !'
 
     def get_success_url(self):
-        return reverse('leer')
+        return reverse('leerRegion')
+
+class MunicipiosCrear(SuccessMessageMixin, CreateView):
+    model = Municipio
+    form = Municipio
+    fields = "__all__"
+    success_message = 'Municipio Creado Correctamente !'
+
+    def get_success_url(self):
+        return reverse('leerMunicipio')
 
 
 class RegionesActualizar(SuccessMessageMixin, UpdateView):
@@ -47,7 +62,18 @@ class RegionesActualizar(SuccessMessageMixin, UpdateView):
 
 
     def get_success_url(self):
-        return reverse('leer')
+        return reverse('leerRegion')
+
+
+class MunicipiosActualizar(SuccessMessageMixin, UpdateView):
+    model = Municipio
+    form = Municipio
+    fields = "__all__"
+    success_message = 'Municipio Actualizado Correctamente !'
+
+
+    def get_success_url(self):
+        return reverse('leerMunicipio')
 
 
 class RegionesEliminar(SuccessMessageMixin, DeleteView):
@@ -58,7 +84,18 @@ class RegionesEliminar(SuccessMessageMixin, DeleteView):
     def get_success_url(self):
         success_message = 'Region Eliminada Correctamente !'
         messages.success(self.request, (success_message))
-        return reverse('leer')
+        return reverse('leerRegion')
+
+
+class MunicipiosEliminar(SuccessMessageMixin, DeleteView):
+    model = Municipio
+    form = Municipio
+    fields = "__all__"
+
+    def get_success_url(self):
+        success_message = 'Municipio Eliminado Correctamente !'
+        messages.success(self.request, (success_message))
+        return reverse('leerMunicipio')
 
 
 

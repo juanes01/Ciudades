@@ -64,7 +64,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h5>Lista de Regiones</h5>
+                <h5>Lista de Municipios</h5>
             </div>
         </div>
 
@@ -75,10 +75,10 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Dashboard</li>
                     <a href="{% url 'leerRegion' %}">
-                    <li class="list-group-item active">Regiones</li>
+                    <li class="list-group-item">Regiones</li>
                     </a>
                     <a href="{% url 'leerMunicipio' %}">
-                    <li class="list-group-item">Municipios</li>
+                    <li class="list-group-item active">Municipios</li>
                     </a>
                 </ul>
             </div>
@@ -109,30 +109,30 @@
                         <tr>
                             <th width="35%">Nombre</th>
                             <th>Código</th>
-                            <th>Municipios</th>
+                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'regiones' y los listamos -->
-                        {% for region in object_list %}
+                        {% for municipio in object_list %}
                         {{object_list}}
                         <tr>
-                            <td>{{ region.nombre }}</td>
-                            <td>{{ region.codigo }}</td>
-                            <td>{{ region.municipios }}</td>
+                            <td>{{ municipio.nombre }}</td>
+                            <td>{{ municipio.codigo }}</td>
+                            <td>{{ municipio.get_estado_display }}</td>
                             <td>
 
                                 <!-- Usaremos un formulario que realizará la tarea de eliminar un registro o region desde la misma tabla HTML -->
-                                <form method="POST" action="eliminar/{{region.codigo}}">
+                                <form method="POST" action="eliminar/{{municipio.codigo}}">
                                     {% csrf_token %}
                                     <div class="btn-group">
 
                                         <!-- Creamos 3 botones que son ver, Editar y Eliminar, nos sirven para gestionar nuestros registros o regiones -->
-                                        <a href="detalle/{{region.codigo}}" title="Ver" type="button"
+                                        <a href="detalle/{{municipio.codigo}}" title="Ver" type="button"
                                            class="btn btn-success">Ver </a>
-                                        <a href="editar/{{region.codigo}}" title="Editar" type="button"
+                                        <a href="editar/{{municipio.codigo}}" title="Editar" type="button"
                                            class="btn btn-primary">Editar </a>
                                         <button class="btn btn-danger" onclick="return eliminar();" type="submit">
                                             Eliminar
