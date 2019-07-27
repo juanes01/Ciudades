@@ -117,7 +117,7 @@
 
                         <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'regiones' y los listamos -->
                         {% for region in object_list %}
-                        {{object_list}}
+                        {{region.municipios}}
                         <tr>
                             <td>{{ region.nombre }}</td>
                             <td>{{ region.codigo }}</td>
