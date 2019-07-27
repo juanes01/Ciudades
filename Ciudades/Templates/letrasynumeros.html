@@ -11,7 +11,7 @@
 
     {# Archivos #}
     {% load static %} <!-- STATIC_URL -->
-    {% load widget_tweaks %}
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -39,6 +39,7 @@
                         <a class="nav-link" href="https://www.linkedin.com/in/juan-castrillon-a2092a84/">Mi perfil</a>
                     </li>
                 </ul>
+
                 <form name="bencc" method="get" action="http://www.google.com/search" id="bencc"
                       class="form-inline mt-2 mt-md-0" target="_blank">
                     <input type="hidden" name="domains" value="blog.nubecolectiva.com">
@@ -66,55 +67,30 @@
 
         <div class="row mb-5">
 
-            <div class="card col-md-2">
-                <h6 class="mt-4"><strong>Menú</strong></h6>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Dashboard</li>
-                    <li class="list-group-item active">Regiones</li>
-                    <li class="list-group-item">Municipios</li>
-                </ul>
-            </div>
 
             <div class="col-md-10">
 
                 <div class="table-responsive">
 
-                    <nav aria-label="breadcrumb mb-3">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="./">Regiones</a></li>
-                            <li class="breadcrumb-item active">Crear</li>
-                        </ol>
-                    </nav>
-
                     <div class="formulario" align="left">
+                        <h4>Conversión de número de fila a letrras (Se tiene en cuenta la Ñ) </h4>
 
-                        <h4>Crear</h4>
-
-                        <form method="post" enctype="multipart/form-data">
-
+                        </BR>
+                        <form action="./" method="post">
                             {% csrf_token %}
-
-                            <!-- {{ form.as_p }} -->
-                            <div class="form-group">
-                                <label for="codigo" class="txt_negrita">Código</label>
-                                {{ form.codigo|add_class:"form-control" }}
-                                <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
-                            </div>
-                            <div class="form-group">
-                                <label for="nombre" class="txt_negrita">Nombre</label>
-                                {{ form.nombre|add_class:"form-control" }}
-                                <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
-                            </div>
-                            <div class="form-group">
-                                <label for="municipios" class="txt_negrita">Municipio</label>
-                                {{ form.municipios|add_class:"form-control" }}
-                                <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Aceptar</button>
-                            <a href="./" type="submit" class="btn btn-primary">Cancelar</a>
-
+                            {{ form }}
+                            <input type="submit" value="Convertir!" class="btn btn-success">
                         </form>
+                        </BR>
+                        </BR>
+
+                        <label for="municipios" class="txt_negrita">La letra es: {{letra}} </label>
+
+                        </BR>
+                        </BR>
+
+                        <!-- Botón para volver a la vista principal (Home) -->
+                        <a href="../" type="submit" class="btn btn-primary">Volver</a>
 
                     </div>
 
@@ -123,14 +99,9 @@
             </div>
 
         </div>
-
     </div>
 
 </main>
-
-
-{# JS y jQuery Bootstrap #}
-{% bootstrap_javascript jquery='full' %}
 
 </body>
 </html>

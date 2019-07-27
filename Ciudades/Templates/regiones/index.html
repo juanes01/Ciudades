@@ -105,7 +105,7 @@
                         <tr>
                             <th width="35%">Nombre</th>
                             <th>codigo</th>
-                            <th>Stock</th>
+                            <th>Municipios</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -113,6 +113,7 @@
 
                         <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'regiones' y los listamos -->
                         {% for region in object_list %}
+                        {{object_list}}
                         <tr>
                             <td>{{ region.nombre }}</td>
                             <td>{{ region.codigo }}</td>
@@ -159,7 +160,6 @@
             else
               return false;
           }
-
 </script>
 
 {# JS y jQuery Bootstrap #}
