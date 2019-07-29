@@ -21,16 +21,16 @@ from .Ciudad import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='regiones'),
+    path('', views.index, name='convertor'),
 
     path('regiones/', views.RegionesListado.as_view(template_name="regiones/index.html"), name='leerRegion'),
 
     path('municipios/', views.MunicipioListado.as_view(template_name="municipios/index.html"), name='leerMunicipio'),
 
 
-    path('regiones/detalle/<int:pk>', views.RegionesDetalle.as_view(template_name="regiones/detalles.html"), name='detalles'),
+    path('regiones/detalle/<int:pk>', views.RegionesDetalle.as_view(template_name="regiones/detalles.html"), name='detallesRegion'),
 
-    path('municipios/detalle/<int:pk>', views.MunicipioDetalle.as_view(template_name="municipios/detalles.html"), name='detalles'),
+    path('municipios/detalle/<int:pk>', views.MunicipioDetalle.as_view(template_name="municipios/detalles.html"), name='detallesMunicipio'),
 
 
     path('regiones/crear', views.RegionesCrear.as_view(template_name="regiones/crear.html"), name='crearRegion'),

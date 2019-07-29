@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
     {# Cargamos la librería #}
     {% load bootstrap4 %}
 
@@ -11,17 +10,17 @@
 
     {# Archivos #}
     {% load static %} <!-- STATIC_URL -->
+    {% load widget_tweaks %}
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="http://nubecolectiva.com/favicon.ico"/>
 
     <meta name="theme-color" content="#000000"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
 
-    <title></title>
+    <title>Conversión de columnas</title>
 
 </head>
 <body>
@@ -39,16 +38,6 @@
                         <a class="nav-link" href="https://www.linkedin.com/in/juan-castrillon-a2092a84/">Mi perfil</a>
                     </li>
                 </ul>
-
-                <form name="bencc" method="get" action="http://www.google.com/search" id="bencc"
-                      class="form-inline mt-2 mt-md-0" target="_blank">
-                    <input type="hidden" name="domains" value="blog.nubecolectiva.com">
-                    <input type="hidden" name="sitesearch" value="blog.nubecolectiva.com">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Buscar..." aria-label="Buscar...">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                            onclick="document.getElementById('bencc').submit()">Buscar
-                    </button>
-                </form>
             </div>
         </div>
     </nav>
@@ -67,18 +56,45 @@
 
         <div class="row mb-5">
 
+            <div class="card col-md-2">
+                <h6 class="mt-4"><strong>Menú</strong></h6>
+                <ul class="list-group list-group-flush">
+                    <a href="{% url 'convertor' %}">
+                        <li class="list-group-item active">Convertor</li>
+                    </a>
+                    <a href="{% url 'leerRegion' %}">
+                        <li class="list-group-item">Regiones</li>
+                    </a>
+                    <a href="{% url 'leerMunicipio' %}">
+                        <li class="list-group-item">Municipios</li>
+                    </a>
+                </ul>
+            </div>
 
             <div class="col-md-10">
 
                 <div class="table-responsive">
 
                     <div class="formulario" align="left">
-                        <h4>Conversión de número de fila a letrras (Se tiene en cuenta la Ñ) </h4>
+                        <h4>Conversión de número de fila a letras (Se tiene en cuenta la Ñ) </h4>
 
                         </BR>
+
+                        {% if form.errors %}
+                        {% for field in form %}
+                        {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                        {% endfor %}
+                        {% endfor %}
+                        {% endif %}
+
                         <form action="./" method="post">
                             {% csrf_token %}
-                            {{ form }}
+                            {{ form.numero.label_tag }}
+                            {{ form.numero|add_class:"form-control" }}
+                            <br>
                             <input type="submit" value="Convertir!" class="btn btn-success">
                         </form>
                         </BR>
@@ -88,9 +104,6 @@
 
                         </BR>
                         </BR>
-
-                        <!-- Botón para volver a la vista principal (Home) -->
-                        <a href="../" type="submit" class="btn btn-primary">Volver</a>
 
                     </div>
 

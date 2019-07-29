@@ -24,6 +24,12 @@
 
 <body>
 
+<style>
+    #celdaMunicipio {
+        border: inset;
+    }
+</style>
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
@@ -37,15 +43,6 @@
                         <a class="nav-link" href="https://www.linkedin.com/in/juan-castrillon-a2092a84/">Mi perfil</a>
                     </li>
                 </ul>
-                <form name="bencc" method="get" action="http://www.google.com/search" id="bencc"
-                      class="form-inline mt-2 mt-md-0" target="_blank">
-                    <input type="hidden" name="domains" value="blog.nubecolectiva.com">
-                    <input type="hidden" name="sitesearch" value="blog.nubecolectiva.com">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Buscar..." aria-label="Buscar...">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                            onclick="document.getElementById('bencc').submit()">Buscar
-                    </button>
-                </form>
             </div>
         </div>
     </nav>
@@ -73,12 +70,14 @@
             <div class="card col-md-2">
                 <h6 class="mt-4"><strong>Menú</strong></h6>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Dashboard</li>
+                    <a href="{% url 'convertor' %}">
+                        <li class="list-group-item">Convertor</li>
+                    </a>
                     <a href="{% url 'leerRegion' %}">
-                    <li class="list-group-item active">Regiones</li>
+                        <li class="list-group-item active">Regiones</li>
                     </a>
                     <a href="{% url 'leerMunicipio' %}">
-                    <li class="list-group-item">Municipios</li>
+                        <li class="list-group-item">Municipios</li>
                     </a>
                 </ul>
             </div>
@@ -117,11 +116,24 @@
 
                         <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'regiones' y los listamos -->
                         {% for region in object_list %}
-                        {{region.municipios}}
+
                         <tr>
                             <td>{{ region.nombre }}</td>
                             <td>{{ region.codigo }}</td>
-                            <td>{{ region.municipios }}</td>
+                             <td id="celdaMunicipio">
+                                 {% for municipio in region.municipios.all %}
+                                 <table>
+                                     <thead>
+                                         <tr>
+                                             {% if municipio.estado == '1' %}
+                                                <p>{{ municipio }}</p>
+                                             {% endif %}
+                                        </tr>
+                                     </thead>
+                                 </table>
+                                 {% endfor %}
+                            </td>
+
                             <td>
 
                                 <!-- Usaremos un formulario que realizará la tarea de eliminar un registro o region desde la misma tabla HTML -->
@@ -158,7 +170,7 @@
 
 <script type="text/javascript">
           function eliminar() {
-            var x = confirm("Eliminar Producto ?");
+            var x = confirm("Eliminar Región ?");
             if (x)
               return true;
             else

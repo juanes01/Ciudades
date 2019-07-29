@@ -15,24 +15,33 @@ from django.shortcuts import render
 
 
 dict = {1: 'A',        2: 'B',        3: 'C',        4: 'D',        5: 'E',        6: 'F',
-        7: 'G',        8: 'H',        9: 'I',        10: 'J',        11: 'K',        12: 'L',
-        13: 'M',        14: 'N',        15: 'Ñ',        16: 'O',        17: 'P',        18: 'Q',
-        19: 'R',        20: 'S',        21: 'T',        22: 'U',        23: 'V',        24: 'W',
-        25: 'X',        26: 'Y',        27: 'Z',
+        7: 'G',        8: 'H',        9: 'I',        10: 'J',       11: 'K',       12: 'L',
+        13: 'M',       14: 'N',       15: 'Ñ',       16: 'O',       17: 'P',       18: 'Q',
+        19: 'R',       20: 'S',       21: 'T',       22: 'U',       23: 'V',       24: 'W',
+        25: 'X',       26: 'Y',       27: 'Z',
         }
 
 
 class RegionesListado(ListView):
     model = Region
 
+
 class RegionesDetalle(DetailView):
     model = Region
+    form = Region
+    fields = "__all__"
+    context_object_name = 'sp'
+
+    def get_context_data(self, **kwargs):
+        kwargs['municipios'] = self.get_object().municipios.all()
+        return super(RegionesDetalle, self).get_context_data(**kwargs)
 
 class MunicipioListado(ListView):
     model = Municipio
 
 class MunicipioDetalle(DetailView):
     model = Municipio
+
 
 
 class RegionesCrear(SuccessMessageMixin, CreateView):
@@ -107,30 +116,30 @@ def index(request):
         if form.is_valid():
             arrayLetras = []
             numero = form.cleaned_data['numero']
-            if ((numero / 27) < 27):
-                numeroi = int(numero / 27)
-                numeroj = int(numero % 27)
-                if numeroi > 0:
-                    letra = dict.get(numeroi)
-                if numeroj > 0:
-                    letra = letra + dict.get(numeroj)
-            else:
-                cociente = numero
-                while(True):
-                    residuo = int(cociente % 27)
-                    cociente = int(cociente / 27)
-                    if cociente < 27:
-                        arrayLetras.append(dict.get(residuo))
-                        arrayLetras.append(dict.get(cociente))
+
+            cociente = numero
+            while True:
+                residuo = int(cociente % 27)
+                cociente = int(cociente / 27)
+                if cociente < 27:
+                    if residuo == 0:
+                        arrayLetras.append(dict.get(27))
+                        if cociente > 1:
+                            arrayLetras.append(dict.get(cociente - 1))
                         break
                     else:
                         arrayLetras.append(dict.get(residuo))
+                    if cociente > 0:
+                        arrayLetras.append(dict.get(cociente))
+                    break
+                else:
+                    arrayLetras.append(dict.get(residuo))
 
-                x = len(arrayLetras)
-                for i in range(len(arrayLetras)):
-                    letra = letra + arrayLetras[x-1]
-                    x = x - 1
-            return render(request, 'letrasynumeros.html', {'form': form, 'letra': letra})
+            x = len(arrayLetras)
+            for i in range(len(arrayLetras)):
+                letra = letra + arrayLetras[x-1]
+                x = x - 1
+        return render(request, 'letrasynumeros.html', {'form': form, 'letra': letra})
 
     else:
         form = numeroLetraForm()

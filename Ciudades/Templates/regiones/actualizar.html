@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Regiones</title>
     {# Cargamos la librería #}
     {% load bootstrap4 %}
 
@@ -21,6 +21,8 @@
 
     <meta name="theme-color" content="#000000"/>
 
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+
 </head>
 <body>
 
@@ -37,20 +39,56 @@
                         <a class="nav-link" href="https://www.linkedin.com/in/juan-castrillon-a2092a84/">Mi perfil</a>
                     </li>
                 </ul>
-                <form name="bencc" method="get" action="http://www.google.com/search" id="bencc"
-                      class="form-inline mt-2 mt-md-0" target="_blank">
-                    <input type="hidden" name="domains" value="blog.nubecolectiva.com">
-                    <input type="hidden" name="sitesearch" value="blog.nubecolectiva.com">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Buscar..." aria-label="Buscar...">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                            onclick="document.getElementById('bencc').submit()">Buscar
-                    </button>
-                </form>
             </div>
         </div>
     </nav>
 </header>
 
+
+<script type="text/javascript">
+
+    function isMobile(){
+        return (
+            (navigator.userAgent.match(/Android/i)) ||
+            (navigator.userAgent.match(/webOS/i)) ||
+            (navigator.userAgent.match(/iPhone/i)) ||
+            (navigator.userAgent.match(/iPod/i)) ||
+            (navigator.userAgent.match(/iPad/i)) ||
+            (navigator.userAgent.match(/BlackBerry/i))
+        );
+    }
+
+    if(!isMobile()){
+        $(window).on('load',function(){
+            $('#exampleModal').modal('show');
+        });
+    }
+
+</script>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Para tener en cuenta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Cuando estes en el campo "Municipios" asegurate de presionar la tecla CTRL y dar click en el o los
+                municipios que
+                desees asociar a la Región que estas editando
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Lo entiendo!</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <main role="main">
 
@@ -67,12 +105,14 @@
             <div class="card col-md-2">
                 <h6 class="mt-4"><strong>Menú</strong></h6>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Dashboard</li>
+                    <a href="{% url 'convertor' %}">
+                        <li class="list-group-item">Convertor</li>
+                    </a>
                     <a href="{% url 'leerRegion' %}">
-                    <li class="list-group-item active">Regiones</li>
+                        <li class="list-group-item active">Regiones</li>
                     </a>
                     <a href="{% url 'leerMunicipio' %}">
-                    <li class="list-group-item">Municipios</li>
+                        <li class="list-group-item">Municipios</li>
                     </a>
                 </ul>
             </div>
@@ -97,7 +137,7 @@
                         <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
 
-                            <!-- {{ form.as_p }} -->
+                            <!--{{ form.as_p }}-->
                             <div class="form-group">
                                 <label for="codigo" class="txt_negrita">Código</label>
                                 {{ form.codigo|add_class:"form-control" }}
